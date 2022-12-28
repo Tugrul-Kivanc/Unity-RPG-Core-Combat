@@ -5,7 +5,7 @@ namespace RPG.Core
     public class Health : MonoBehaviour
     {
         [SerializeField] float healthPoints = 100f;
-        private bool isDead = false;
+        bool isDead = false;
         public bool IsDead()
         {
             return isDead;
@@ -21,7 +21,7 @@ namespace RPG.Core
             }
         }
 
-        private void Die()
+        void Die()
         {
             if (isDead) return;
             isDead = true;

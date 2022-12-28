@@ -13,7 +13,7 @@ namespace RPG.Combat
         Health target;
         float timeSinceLastAttack = Mathf.Infinity;
 
-        private void Update()
+        void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
 
@@ -31,7 +31,7 @@ namespace RPG.Combat
             }
         }
 
-        private void AttackBehaviour()
+        void AttackBehaviour()
         {
             transform.LookAt(target.transform);
             if (timeSinceLastAttack > timeBetweenAttacks)
@@ -42,7 +42,7 @@ namespace RPG.Combat
             }
         }
 
-        private void TriggerAttack()
+        void TriggerAttack()
         {
             GetComponent<Animator>().ResetTrigger("stopAttack");
             GetComponent<Animator>().SetTrigger("attack");
@@ -55,7 +55,7 @@ namespace RPG.Combat
             target.TakeDamage(weaponDamage);
         }
 
-        private bool GetIsInRange()
+        bool GetIsInRange()
         {
             return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
         }
@@ -72,7 +72,7 @@ namespace RPG.Combat
             target = null;
         }
 
-        private void StopAttack()
+        void StopAttack()
         {
             GetComponent<Animator>().ResetTrigger("attack");
             GetComponent<Animator>().SetTrigger("stopAttack");

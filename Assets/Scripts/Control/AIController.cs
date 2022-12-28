@@ -15,16 +15,16 @@ namespace RPG.Control
         [SerializeField] float waypointTolerance = 1f;
         [SerializeField] float waypointGuardingDuration = 4f;
         [SerializeField] PatrolPath patrolPath;
-        private GameObject player;
-        private Fighter fighter;
-        private Health health;
-        private Mover mover;
-        private Vector3 initialGuardPosition;
+        GameObject player;
+        Fighter fighter;
+        Health health;
+        Mover mover;
+        Vector3 initialGuardPosition;
         float timeSincePlayerSeen = Mathf.Infinity;
         float timeSinceArriveAtWaypoint = Mathf.Infinity;
         int currentWaypointIndex = 0;
 
-        private void Start()
+        void Start()
         {
             player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
@@ -34,7 +34,7 @@ namespace RPG.Control
             initialGuardPosition = transform.position;
         }
 
-        private void Update()
+        void Update()
         {
             if (health.IsDead()) return;
 
@@ -53,13 +53,13 @@ namespace RPG.Control
             UpdateTimers();
         }
 
-        private void UpdateTimers()
+        void UpdateTimers()
         {
             timeSincePlayerSeen += Time.deltaTime;
             timeSinceArriveAtWaypoint += Time.deltaTime;
         }
 
-        private void PatrolBehavior()
+        void PatrolBehavior()
         {
             Vector3 nextPosition = initialGuardPosition;
             if (patrolPath != null)
@@ -78,40 +78,40 @@ namespace RPG.Control
                 mover.StartMoveAction(nextPosition);
         }
 
-        private Vector3 GetCurrentWaypoint()
+        Vector3 GetCurrentWaypoint()
         {
             return patrolPath.GetWaypointPosition(currentWaypointIndex);
         }
 
-        private void CycleWaypoint()
+        void CycleWaypoint()
         {
             currentWaypointIndex = patrolPath.GetNextIndexCircular(currentWaypointIndex);
         }
 
-        private bool IsAtWaypoint()
+        bool IsAtWaypoint()
         {
             float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
             return distanceToWaypoint < waypointTolerance;
         }
 
-        private void SuspicionBehavior()
+        void SuspicionBehavior()
         {
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }
 
-        private void AttackBehavior()
+        void AttackBehavior()
         {
             timeSincePlayerSeen = 0;
             fighter.Attack(player);
         }
 
-        private bool IsPlayerInAttackRange()
+        bool IsPlayerInAttackRange()
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
             return distanceToPlayer < chaseDistance;
         }
 
-        private void OnDrawGizmosSelected()
+        void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, chaseDistance);

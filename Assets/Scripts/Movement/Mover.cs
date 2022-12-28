@@ -9,11 +9,10 @@ namespace RPG.Movement
     public class Mover : MonoBehaviour, IAction
     {
         [SerializeField] Transform target;
-
         NavMeshAgent navMeshAgent;
         Health health;
 
-        private void Start()
+        void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
@@ -42,7 +41,7 @@ namespace RPG.Movement
             navMeshAgent.isStopped = true;
         }
 
-        private void UpdateAnimator()
+        void UpdateAnimator()
         {
             Vector3 velocity = navMeshAgent.velocity;
             Vector3 localVelocity = transform.InverseTransformDirection(velocity);
