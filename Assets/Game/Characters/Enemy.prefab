@@ -29,6 +29,7 @@ MonoBehaviour:
   chaseDistance: 5
   suspicionTime: 6
   waypointTolerance: 0.7
+  waypointGuardingDuration: 4
   patrolPath: {fileID: 0}
 --- !u!114 &4869708733900857438
 MonoBehaviour:
