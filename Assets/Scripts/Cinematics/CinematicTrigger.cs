@@ -14,6 +14,7 @@ namespace RPG.Cinematics
             {
                 isTriggered = true;
                 GetComponent<PlayableDirector>().Play();
+                GetComponent<BoxCollider>().enabled = false;
             }
         }
     }
