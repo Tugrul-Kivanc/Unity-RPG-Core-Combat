@@ -14,6 +14,7 @@ namespace RPG.Control
         [SerializeField] float suspicionTime = 6f;
         [SerializeField] float waypointTolerance = 1f;
         [SerializeField] float waypointGuardingDuration = 4f;
+        [Range(0, 1)][SerializeField] float patrolSpeedFraction = 0.5f;
         [SerializeField] PatrolPath patrolPath;
         GameObject player;
         Fighter fighter;
@@ -75,7 +76,7 @@ namespace RPG.Control
                 }
             }
             if (timeSinceArriveAtWaypoint > waypointGuardingDuration)
-                mover.StartMoveAction(nextPosition);
+                mover.StartMoveAction(nextPosition, patrolSpeedFraction);
         }
 
         Vector3 GetCurrentWaypoint()
