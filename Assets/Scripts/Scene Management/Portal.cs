@@ -12,6 +12,9 @@ namespace RPG.SceneManagement
         [SerializeField] int sceneIndexToLoad = -1;
         [SerializeField] Transform spawnPoint;
         [SerializeField] DestinationIdentifier destination;
+        [SerializeField] float fadeOutTime = 0.5f;
+        [SerializeField] float fadeInTime = 0.5f;
+        [SerializeField] float fadeWaitTime = 0.1f;
 
         enum DestinationIdentifier
         {
@@ -34,9 +37,17 @@ namespace RPG.SceneManagement
                 yield break;
             }
             DontDestroyOnLoad(gameObject);
+
+            Fader fader = FindObjectOfType<Fader>();
+            yield return fader.FadeOut(fadeOutTime);
             yield return SceneManager.LoadSceneAsync(sceneIndexToLoad);
+
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
+
+            yield return new WaitForSeconds(fadeWaitTime);
+            yield return fader.FadeIn(fadeInTime);
+
             Destroy(gameObject);
         }
 
