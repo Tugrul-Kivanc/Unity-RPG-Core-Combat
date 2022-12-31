@@ -44,11 +44,13 @@ namespace RPG.SceneManagement
 
             yield return fader.FadeOut(fadeOutTime);
             savingWrapper.Save();
+
             yield return SceneManager.LoadSceneAsync(sceneIndexToLoad);
             savingWrapper.Load();
 
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
+            savingWrapper.Save();
 
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
