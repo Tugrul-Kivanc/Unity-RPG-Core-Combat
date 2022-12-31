@@ -11,6 +11,8 @@ namespace RPG.SavingSystem
     public class SavingSystem : MonoBehaviour
     {
         string saveFileExtension = ".sav";
+        //TODO binaryformatter is insecure
+        //https://gitlab.com/Mnemoth42/RPG/-/wikis/home
         BinaryFormatter formatter = new BinaryFormatter();
         Transform player;
         void Awake()
@@ -22,8 +24,7 @@ namespace RPG.SavingSystem
             string path = GetPathFromSaveFile(saveFile);
             using (FileStream stream = File.Open(path, FileMode.Create))
             {
-                SerializableVector3 serializablePosition = new SerializableVector3(player.position);
-                formatter.Serialize(stream, serializablePosition);
+                formatter.Serialize(stream, CaptureState());
             }
         }
 
@@ -32,14 +33,32 @@ namespace RPG.SavingSystem
             string path = GetPathFromSaveFile(saveFile);
             using (FileStream stream = File.Open(path, FileMode.Open))
             {
-                SerializableVector3 serializedPosition = (SerializableVector3)formatter.Deserialize(stream);
-                player.position = serializedPosition.ToVector();
+                RestoreState(formatter.Deserialize(stream));
             }
         }
 
-        private string GetPathFromSaveFile(string saveFile)
+        string GetPathFromSaveFile(string saveFile)
         {
             return Path.Combine(Application.persistentDataPath, saveFile + saveFileExtension);
+        }
+
+        object CaptureState()
+        {
+            Dictionary<string, object> state = new Dictionary<string, object>();
+            foreach (var saveableEntity in FindObjectsOfType<SaveableEntity>())
+            {
+                state[saveableEntity.GetUniqueIdentifier()] = saveableEntity.CaptureState();
+            }
+            return state;
+        }
+
+        void RestoreState(object state)
+        {
+            Dictionary<string, object> stateDict = (Dictionary<string, object>)state;
+            foreach (var saveableEntity in FindObjectsOfType<SaveableEntity>())
+            {
+                saveableEntity.RestoreState(stateDict[saveableEntity.GetUniqueIdentifier()]);
+            }
         }
     }
 }
