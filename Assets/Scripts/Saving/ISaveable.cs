@@ -1,4 +1,4 @@
-namespace RPG.SavingSystem
+namespace RPG.Saving
 {
     public interface ISaveable
     {
