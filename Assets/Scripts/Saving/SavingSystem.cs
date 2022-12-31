@@ -18,6 +18,7 @@ namespace RPG.SavingSystem
         void Awake()
         {
             player = GameObject.FindWithTag("Player").transform;
+            print("Save location: " + Application.persistentDataPath);
         }
         public void Save(string saveFile)
         {
