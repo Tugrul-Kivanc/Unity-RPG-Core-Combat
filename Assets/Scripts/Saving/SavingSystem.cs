@@ -11,7 +11,8 @@ namespace RPG.SavingSystem
 {
     public class SavingSystem : MonoBehaviour
     {
-        string saveFileExtension = ".sav";
+        const string saveFileExtension = ".sav";
+        const string lastSceneBuildIndexId = "lastSceneBuildIndex";
         //TODO binaryformatter is insecure
         //https://gitlab.com/Mnemoth42/RPG/-/wikis/home
         BinaryFormatter formatter = new BinaryFormatter();
@@ -64,7 +65,7 @@ namespace RPG.SavingSystem
             {
                 state[saveableEntity.GetUniqueIdentifier()] = saveableEntity.CaptureState();
             }
-            state["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
+            state[lastSceneBuildIndexId] = SceneManager.GetActiveScene().buildIndex;
         }
 
         void RestoreState(Dictionary<string, object> state)
@@ -82,9 +83,9 @@ namespace RPG.SavingSystem
         public IEnumerator LoadLastScene(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile);
-            if (state.ContainsKey("lastSceneBuildIndex"))
+            if (state.ContainsKey(lastSceneBuildIndexId))
             {
-                int buildIndex = (int)state["lastSceneBuildIndex"];
+                int buildIndex = (int)state[lastSceneBuildIndexId];
 
                 if (buildIndex != SceneManager.GetActiveScene().buildIndex)
                     yield return SceneManager.LoadSceneAsync(buildIndex);
