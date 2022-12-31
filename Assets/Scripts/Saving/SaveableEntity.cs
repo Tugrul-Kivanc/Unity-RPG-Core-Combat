@@ -31,13 +31,17 @@ namespace RPG.SavingSystem
 
             globalLookup[serializedProperty.stringValue] = this;
         }
-
+#endif
         private bool IsUnique(string candidate)
         {
             if (!globalLookup.ContainsKey(candidate)) return true;
             if (globalLookup[candidate] == this) return true;
-            if (globalLookup[candidate] == null ||
-                globalLookup[candidate].GetUniqueIdentifier() != candidate)
+            if (globalLookup[candidate] == null)
+            {
+                globalLookup.Remove(candidate);
+                return true;
+            }
+            if (globalLookup[candidate].GetUniqueIdentifier() != candidate)
             {
                 globalLookup.Remove(candidate);
                 return true;
@@ -45,7 +49,6 @@ namespace RPG.SavingSystem
 
             return false;
         }
-#endif
         public string GetUniqueIdentifier()
         {
             return uniqueIdentifier;
