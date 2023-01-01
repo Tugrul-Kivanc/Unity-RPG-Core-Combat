@@ -53,12 +53,26 @@ namespace RPG.Combat
             GetComponent<Animator>().SetTrigger("attack");
         }
 
-        // Animation Event
+        #region Animation Events
         void Hit()
         {
             if (target == null) return;
-            target.TakeDamage(currentWeapon.Damage);
+
+            if (!currentWeapon.IsRangedWeapon())
+            {
+                target.TakeDamage(currentWeapon.Damage);
+            }
+            else
+            {
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+            }
         }
+
+        void Shoot()
+        {
+            Hit();
+        }
+        #endregion
 
         bool GetIsInRange()
         {
