@@ -9,6 +9,7 @@ namespace RPG.Combat
     {
         [SerializeField] Transform target = null;
         [SerializeField] float speed = 2f;
+        Collider targetCollider;
 
         // Update is called once per frame
         void Update()
@@ -21,10 +22,10 @@ namespace RPG.Combat
 
         Vector3 GetTargetLocation()
         {
-            CapsuleCollider targetCollider = target.GetComponent<CapsuleCollider>();
+            targetCollider = target.GetComponent<Collider>();
             if (targetCollider == null) return target.position;
 
-            return target.position + targetCollider.height * 0.5f * Vector3.up;
+            return targetCollider.bounds.center;
         }
     }
 }
