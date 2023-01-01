@@ -3,7 +3,10 @@ guid: 9ed0630d0160f35439dffb044c3ae874
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - weaponPrefab: {instanceID: 0}
+  - handTransform: {instanceID: 0}
+  - weaponOverride: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
