@@ -35,15 +35,6 @@ namespace RPG.Combat
             return targetCollider.bounds.center;
         }
 
-        // void OnCollisionEnter(Collision other)
-        // {
-        //     if (other.gameObject == target.gameObject)
-        //     {
-        //         target.TakeDamage(damage);
-        //     }
-        //     Destroy(this);
-        // }
-
         void OnTriggerEnter(Collider other)
         {
             Destroy(gameObject);
