@@ -59,6 +59,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: e0effc2c2e72b5441b0e731cd01788d3,
         type: 2}
+    - target: {fileID: 3125957438692005694, guid: 750e3c6876a501e42b5827ec7a3d24d1,
+        type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 91689db5ab49f414cb494e7677874d6f,
+        type: 2}
     - target: {fileID: 3307795589981818629, guid: 750e3c6876a501e42b5827ec7a3d24d1,
         type: 3}
       propertyPath: healthPoints
