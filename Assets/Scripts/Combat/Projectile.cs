@@ -10,7 +10,7 @@ namespace RPG.Combat
     {
         [SerializeField] float speed = 2f;
         Health target = null;
-        Collider targetCollider;
+        float damage = 0f;
 
         // Update is called once per frame
         void Update()
@@ -21,17 +21,36 @@ namespace RPG.Combat
             transform.Translate(speed * Time.deltaTime * Vector3.forward);
         }
 
-        public void SetTarget(Health target)
+        public void SetTarget(Health target, float damage)
         {
             this.target = target;
+            this.damage = damage;
         }
 
         Vector3 GetTargetLocation()
         {
-            targetCollider = target.GetComponent<Collider>();
+            Collider targetCollider = target.GetComponent<Collider>();
             if (targetCollider == null) return target.transform.position;
 
             return targetCollider.bounds.center;
+        }
+
+        // void OnCollisionEnter(Collision other)
+        // {
+        //     if (other.gameObject == target.gameObject)
+        //     {
+        //         target.TakeDamage(damage);
+        //     }
+        //     Destroy(this);
+        // }
+
+        void OnTriggerEnter(Collider other)
+        {
+            Destroy(gameObject);
+
+            if (other.GetComponent<Health>() != target) return;
+
+            target.TakeDamage(damage);
         }
     }
 }
