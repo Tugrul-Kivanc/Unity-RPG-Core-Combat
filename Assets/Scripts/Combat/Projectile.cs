@@ -23,7 +23,7 @@ namespace RPG.Combat
         {
             if (target == null) return;
 
-            if (isHoming)
+            if (isHoming && !target.IsDead())
             {
                 transform.LookAt(GetTargetLocation());
             }
@@ -49,6 +49,7 @@ namespace RPG.Combat
             Destroy(gameObject);
 
             if (other.GetComponent<Health>() != target) return;
+            if (target.IsDead()) return;
 
             target.TakeDamage(damage);
         }
