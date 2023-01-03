@@ -9,15 +9,24 @@ namespace RPG.Combat
     public class Projectile : MonoBehaviour
     {
         [SerializeField] float speed = 2f;
+        [SerializeField] bool isHoming = false;
         Health target = null;
         float damage = 0f;
+        bool initialLook = true;
 
-        // Update is called once per frame
+        void Start()
+        {
+            transform.LookAt(GetTargetLocation());
+        }
+
         void Update()
         {
             if (target == null) return;
 
-            transform.LookAt(GetTargetLocation());
+            if (isHoming)
+            {
+                transform.LookAt(GetTargetLocation());
+            }
             transform.Translate(speed * Time.deltaTime * Vector3.forward);
         }
 
