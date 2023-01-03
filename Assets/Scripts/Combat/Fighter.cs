@@ -9,14 +9,17 @@ namespace RPG.Combat
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
-        [SerializeField] Weapon defaultWeapon = null;
+        [SerializeField] string defaultWeaponName = "Unarmed";
         Health target;
         Weapon currentWeapon = null;
         float timeSinceLastAttack = Mathf.Infinity;
 
         void Start()
         {
-            EquipWeapon(defaultWeapon);
+            //Use addressables on later versions for saving.
+            //https://docs.unity3d.com/Manual/com.unity.addressables.html
+            var weapon = Resources.Load(defaultWeaponName) as Weapon;
+            EquipWeapon(weapon);
         }
         void Update()
         {
