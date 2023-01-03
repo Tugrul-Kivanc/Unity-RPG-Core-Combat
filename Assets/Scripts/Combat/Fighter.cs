@@ -1,25 +1,26 @@
 using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
+using RPG.Saving;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction
+    public class Fighter : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
-        [SerializeField] string defaultWeaponName = "Unarmed";
+        [SerializeField] Weapon defaultWeapon = null;
         Health target;
         Weapon currentWeapon = null;
         float timeSinceLastAttack = Mathf.Infinity;
 
         void Start()
         {
-            //Use addressables on later versions for saving.
-            //https://docs.unity3d.com/Manual/com.unity.addressables.html
-            var weapon = Resources.Load(defaultWeaponName) as Weapon;
-            EquipWeapon(weapon);
+            if (currentWeapon == null)
+            {
+                EquipWeapon(defaultWeapon);
+            }
         }
         void Update()
         {
@@ -114,6 +115,20 @@ namespace RPG.Combat
 
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
+        }
+
+        public object CaptureState()
+        {
+            return currentWeapon.name;
+        }
+
+        public void RestoreState(object state)
+        {
+            //Use addressables on later versions for saving.
+            //https://docs.unity3d.com/Manual/com.unity.addressables.html
+            string weaponName = (string)state;
+            var weapon = Resources.Load(weaponName) as Weapon;
+            EquipWeapon(weapon);
         }
     }
 }
