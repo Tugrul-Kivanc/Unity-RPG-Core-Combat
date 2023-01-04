@@ -61,15 +61,15 @@ namespace RPG.Combat
         #region Animation Events
         void Hit()
         {
-            if (target == null) return;
+            if (target == null || target.IsDead()) return;
 
             if (!currentWeapon.IsRangedWeapon())
             {
-                target.TakeDamage(currentWeapon.Damage);
+                target.TakeDamage(gameObject, currentWeapon.Damage);
             }
             else
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
             }
         }
 
