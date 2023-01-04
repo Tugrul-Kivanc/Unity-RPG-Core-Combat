@@ -38,6 +38,11 @@ namespace RPG.Attributes
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }
 
+        public float GetHealth()
+        {
+            return healthPoints;
+        }
+
         public object CaptureState()
         {
             return healthPoints;
