@@ -11,7 +11,7 @@ namespace RPG.Attributes
         [SerializeField] float healthPoints = 100f;
         bool isDead = false;
 
-        void Start()
+        void Awake()
         {
             healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
         }
