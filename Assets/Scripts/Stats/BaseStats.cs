@@ -13,10 +13,10 @@ namespace RPG.Stats
 
         public float GetStat(Stat stat)
         {
-            return progression.GetStat(stat, characterClass, GetLevel());
+            return progression.GetStat(stat, characterClass, CalculateLevel());
         }
 
-        public int GetLevel()
+        public int CalculateLevel()
         {
             Experience experience = GetComponent<Experience>();
             if (experience == null) return initialLevel;
@@ -32,7 +32,13 @@ namespace RPG.Stats
                     return lvl;
                 }
             }
-            return penultimateLevel + 1;
+            level = penultimateLevel + 1;
+            return level;
+        }
+
+        public int GetLevel()
+        {
+            return level;
         }
     }
 }
