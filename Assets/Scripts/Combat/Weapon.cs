@@ -7,15 +7,15 @@ namespace RPG.Combat
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Create New Scriptable Weapon", order = 0)]
     public class Weapon : ScriptableObject
     {
-        [SerializeField] AnimatorOverrideController animatorOverride = null;
-        [SerializeField] GameObject equippedWeaponPrefab = null;
-        [SerializeField] bool isRightHanded = true;
-        [SerializeField] Projectile projectile = null;
-        [SerializeField] float range = 2f;
+        [SerializeField] private AnimatorOverrideController animatorOverride = null;
+        [SerializeField] private GameObject equippedWeaponPrefab = null;
+        [SerializeField] private bool isRightHanded = true;
+        [SerializeField] private Projectile projectile = null;
+        [SerializeField] private float range = 2f;
+        [SerializeField] private float damage = 5f;
         public float Range => range;
-        [SerializeField] float damage = 5f;
         public float Damage => damage;
-        const string weaponName = "Weapon";
+        private const string weaponName = "Weapon";
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
             DestroyOldWeapon(rightHand, leftHand);
@@ -29,7 +29,7 @@ namespace RPG.Combat
             SetupAnimator(animator);
         }
 
-        void SetupAnimator(Animator animator)
+        private void SetupAnimator(Animator animator)
         {
             var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
             if (animatorOverride != null)
@@ -42,7 +42,7 @@ namespace RPG.Combat
             }
         }
 
-        void DestroyOldWeapon(Transform rightHand, Transform leftHand)
+        private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
         {
             Transform oldWeapon = rightHand.Find(weaponName);
             if (oldWeapon == null)

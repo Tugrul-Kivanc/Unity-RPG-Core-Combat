@@ -7,17 +7,17 @@ namespace RPG.Stats
 {
     public class LevelDisplay : MonoBehaviour
     {
-        BaseStats baseStats;
-        TextMeshProUGUI experienceText;
+        private BaseStats baseStats;
+        private TextMeshProUGUI experienceText;
         // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
             baseStats = GameObject.FindWithTag("Player").GetComponent<BaseStats>();
             experienceText = GetComponent<TextMeshProUGUI>();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             experienceText.text = baseStats.CalculateLevel().ToString();
         }

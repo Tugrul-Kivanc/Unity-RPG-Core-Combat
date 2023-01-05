@@ -11,13 +11,13 @@ namespace RPG.Saving
 {
     public class SavingSystem : MonoBehaviour
     {
-        const string saveFileExtension = ".sav";
-        const string lastSceneBuildIndexId = "lastSceneBuildIndex";
+        private const string saveFileExtension = ".sav";
+        private const string lastSceneBuildIndexId = "lastSceneBuildIndex";
         //TODO binaryformatter is insecure
         //https://gitlab.com/Mnemoth42/RPG/-/wikis/home
-        BinaryFormatter formatter = new BinaryFormatter();
-        Transform player;
-        void Awake()
+        private BinaryFormatter formatter = new BinaryFormatter();
+        private Transform player;
+        private void Awake()
         {
             player = GameObject.FindWithTag("Player").transform;
             print("Save location: " + Application.persistentDataPath);
@@ -39,7 +39,7 @@ namespace RPG.Saving
             File.Delete(GetPathFromSaveFile(saveFile));
         }
 
-        void SaveFile(string saveFile, object state)
+        private void SaveFile(string saveFile, object state)
         {
             string path = GetPathFromSaveFile(saveFile);
             using (FileStream stream = File.Open(path, FileMode.Create))
@@ -48,7 +48,7 @@ namespace RPG.Saving
             }
         }
 
-        Dictionary<string, object> LoadFile(string saveFile)
+        private Dictionary<string, object> LoadFile(string saveFile)
         {
             string path = GetPathFromSaveFile(saveFile);
             if (!File.Exists(path)) return new Dictionary<string, object>();
@@ -59,12 +59,12 @@ namespace RPG.Saving
             }
         }
 
-        string GetPathFromSaveFile(string saveFile)
+        private string GetPathFromSaveFile(string saveFile)
         {
             return Path.Combine(Application.persistentDataPath, saveFile + saveFileExtension);
         }
 
-        void CaptureState(Dictionary<string, object> state)
+        private void CaptureState(Dictionary<string, object> state)
         {
             foreach (var saveableEntity in FindObjectsOfType<SaveableEntity>())
             {
@@ -73,7 +73,7 @@ namespace RPG.Saving
             state[lastSceneBuildIndexId] = SceneManager.GetActiveScene().buildIndex;
         }
 
-        void RestoreState(Dictionary<string, object> state)
+        private void RestoreState(Dictionary<string, object> state)
         {
             foreach (var saveableEntity in FindObjectsOfType<SaveableEntity>())
             {

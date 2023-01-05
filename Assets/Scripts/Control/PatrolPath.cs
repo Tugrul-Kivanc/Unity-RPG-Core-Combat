@@ -6,8 +6,8 @@ namespace RPG.Control
 {
     public class PatrolPath : MonoBehaviour
     {
-        const float waypointGizmoRadius = 0.5f;
-        void OnDrawGizmos()
+        private const float waypointGizmoRadius = 0.5f;
+        private void OnDrawGizmos()
         {
             for (int i = 0; i < transform.childCount; i++)
             {

@@ -7,17 +7,17 @@ namespace RPG.Stats
 {
     public class ExperienceDisplay : MonoBehaviour
     {
-        Experience experience;
-        TextMeshProUGUI experienceText;
+        private Experience experience;
+        private TextMeshProUGUI experienceText;
         // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
             experience = GameObject.FindWithTag("Player").GetComponent<Experience>();
             experienceText = GetComponent<TextMeshProUGUI>();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             experienceText.text = experience.GetExperiencePoints().ToString();
         }

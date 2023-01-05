@@ -10,18 +10,18 @@ namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction, ISaveable
     {
-        [SerializeField] Transform target;
-        [SerializeField] float maxSpeed = 6f;
-        NavMeshAgent navMeshAgent;
-        Health health;
+        [SerializeField] private Transform target;
+        [SerializeField] private float maxSpeed = 6f;
+        private NavMeshAgent navMeshAgent;
+        private Health health;
 
-        void Start()
+        private void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
         }
 
-        void Update()
+        private void Update()
         {
             navMeshAgent.enabled = !health.IsDead();
             UpdateAnimator();
@@ -45,7 +45,7 @@ namespace RPG.Movement
             navMeshAgent.isStopped = true;
         }
 
-        void UpdateAnimator()
+        private void UpdateAnimator()
         {
             Vector3 velocity = navMeshAgent.velocity;
             Vector3 localVelocity = transform.InverseTransformDirection(velocity);

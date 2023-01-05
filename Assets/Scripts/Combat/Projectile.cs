@@ -8,22 +8,22 @@ namespace RPG.Combat
 {
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] float speed = 2f;
-        [SerializeField] float maxLifeTime = 5f;
-        [SerializeField] float lifeAfterImpact = 0.1f;
-        [SerializeField] bool isHoming = false;
-        [SerializeField] GameObject hitFX = null;
-        [SerializeField] GameObject[] objectsToDestroyOnHit = null;
-        Health target = null;
-        GameObject instigator = null;
-        float damage = 0f;
+        [SerializeField] private float speed = 2f;
+        [SerializeField] private float maxLifeTime = 5f;
+        [SerializeField] private float lifeAfterImpact = 0.1f;
+        [SerializeField] private bool isHoming = false;
+        [SerializeField] private GameObject hitFX = null;
+        [SerializeField] private GameObject[] objectsToDestroyOnHit = null;
+        private Health target = null;
+        private GameObject instigator = null;
+        private float damage = 0f;
 
-        void Start()
+        private void Start()
         {
             transform.LookAt(GetTargetLocation());
         }
 
-        void Update()
+        private void Update()
         {
             if (target == null) return;
 
@@ -43,7 +43,7 @@ namespace RPG.Combat
             Destroy(gameObject, maxLifeTime);
         }
 
-        Vector3 GetTargetLocation()
+        private Vector3 GetTargetLocation()
         {
             Collider targetCollider = target.GetComponent<Collider>();
             if (targetCollider == null) return target.transform.position;
@@ -51,7 +51,7 @@ namespace RPG.Combat
             return targetCollider.bounds.center;
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<Health>() != target) return;
             if (target.IsDead()) return;

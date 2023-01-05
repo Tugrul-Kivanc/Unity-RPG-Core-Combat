@@ -11,11 +11,11 @@ namespace RPG.Saving
     [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour
     {
-        [SerializeField] string uniqueIdentifier = "";
-        static Dictionary<string, SaveableEntity> globalLookup = new Dictionary<string, SaveableEntity>();
+        [SerializeField] private string uniqueIdentifier = "";
+        private static Dictionary<string, SaveableEntity> globalLookup = new Dictionary<string, SaveableEntity>();
 
 #if UNITY_EDITOR
-        void Update()
+        private void Update()
         {
             if (Application.IsPlaying(gameObject)) return;
             if (string.IsNullOrEmpty(gameObject.scene.path)) return; //Return if we are in a prefab

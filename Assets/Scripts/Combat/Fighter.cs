@@ -8,22 +8,22 @@ namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction, ISaveable
     {
-        [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] Transform rightHandTransform = null;
-        [SerializeField] Transform leftHandTransform = null;
-        [SerializeField] Weapon defaultWeapon = null;
-        Health target;
-        Weapon currentWeapon = null;
-        float timeSinceLastAttack = Mathf.Infinity;
+        [SerializeField] private float timeBetweenAttacks = 1f;
+        [SerializeField] private Transform rightHandTransform = null;
+        [SerializeField] private Transform leftHandTransform = null;
+        [SerializeField] private Weapon defaultWeapon = null;
+        private Health target;
+        private Weapon currentWeapon = null;
+        private float timeSinceLastAttack = Mathf.Infinity;
 
-        void Start()
+        private void Start()
         {
             if (currentWeapon == null)
             {
                 EquipWeapon(defaultWeapon);
             }
         }
-        void Update()
+        private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
 
@@ -41,7 +41,7 @@ namespace RPG.Combat
             }
         }
 
-        void AttackBehaviour()
+        private void AttackBehaviour()
         {
             transform.LookAt(target.transform);
             if (timeSinceLastAttack > timeBetweenAttacks)
@@ -52,14 +52,14 @@ namespace RPG.Combat
             }
         }
 
-        void TriggerAttack()
+        private void TriggerAttack()
         {
             GetComponent<Animator>().ResetTrigger("stopAttack");
             GetComponent<Animator>().SetTrigger("attack");
         }
 
         #region Animation Events
-        void Hit()
+        private void Hit()
         {
             if (target == null || target.IsDead()) return;
 
@@ -73,13 +73,13 @@ namespace RPG.Combat
             }
         }
 
-        void Shoot()
+        private void Shoot()
         {
             Hit();
         }
         #endregion
 
-        bool GetIsInRange()
+        private bool GetIsInRange()
         {
             return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.Range;
         }
@@ -97,7 +97,7 @@ namespace RPG.Combat
             GetComponent<Mover>().Cancel();
         }
 
-        void StopAttack()
+        private void StopAttack()
         {
             GetComponent<Animator>().ResetTrigger("attack");
             GetComponent<Animator>().SetTrigger("stopAttack");

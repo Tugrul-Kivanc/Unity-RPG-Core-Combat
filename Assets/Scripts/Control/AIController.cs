@@ -10,22 +10,22 @@ namespace RPG.Control
 {
     public class AIController : MonoBehaviour
     {
-        [SerializeField] float chaseDistance = 5f;
-        [SerializeField] float suspicionTime = 6f;
-        [SerializeField] float waypointTolerance = 1f;
-        [SerializeField] float waypointGuardingDuration = 4f;
-        [Range(0, 1)][SerializeField] float patrolSpeedFraction = 0.5f;
-        [SerializeField] PatrolPath patrolPath;
-        GameObject player;
-        Fighter fighter;
-        Health health;
-        Mover mover;
-        Vector3 initialGuardPosition;
-        float timeSincePlayerSeen = Mathf.Infinity;
-        float timeSinceArriveAtWaypoint = Mathf.Infinity;
-        int currentWaypointIndex = 0;
+        [SerializeField] private float chaseDistance = 5f;
+        [SerializeField] private float suspicionTime = 6f;
+        [SerializeField] private float waypointTolerance = 1f;
+        [SerializeField] private float waypointGuardingDuration = 4f;
+        [Range(0, 1)][SerializeField] private float patrolSpeedFraction = 0.5f;
+        [SerializeField] private PatrolPath patrolPath;
+        private GameObject player;
+        private Fighter fighter;
+        private Health health;
+        private Mover mover;
+        private Vector3 initialGuardPosition;
+        private float timeSincePlayerSeen = Mathf.Infinity;
+        private float timeSinceArriveAtWaypoint = Mathf.Infinity;
+        private int currentWaypointIndex = 0;
 
-        void Start()
+        private void Start()
         {
             player = GameObject.FindWithTag("Player");
             fighter = GetComponent<Fighter>();
@@ -35,7 +35,7 @@ namespace RPG.Control
             initialGuardPosition = transform.position;
         }
 
-        void Update()
+        private void Update()
         {
             if (health.IsDead()) return;
 
@@ -54,13 +54,13 @@ namespace RPG.Control
             UpdateTimers();
         }
 
-        void UpdateTimers()
+        private void UpdateTimers()
         {
             timeSincePlayerSeen += Time.deltaTime;
             timeSinceArriveAtWaypoint += Time.deltaTime;
         }
 
-        void PatrolBehavior()
+        private void PatrolBehavior()
         {
             Vector3 nextPosition = initialGuardPosition;
             if (patrolPath != null)
@@ -79,40 +79,40 @@ namespace RPG.Control
                 mover.StartMoveAction(nextPosition, patrolSpeedFraction);
         }
 
-        Vector3 GetCurrentWaypoint()
+        private Vector3 GetCurrentWaypoint()
         {
             return patrolPath.GetWaypointPosition(currentWaypointIndex);
         }
 
-        void CycleWaypoint()
+        private void CycleWaypoint()
         {
             currentWaypointIndex = patrolPath.GetNextIndexCircular(currentWaypointIndex);
         }
 
-        bool IsAtWaypoint()
+        private bool IsAtWaypoint()
         {
             float distanceToWaypoint = Vector3.Distance(transform.position, GetCurrentWaypoint());
             return distanceToWaypoint < waypointTolerance;
         }
 
-        void SuspicionBehavior()
+        private void SuspicionBehavior()
         {
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }
 
-        void AttackBehavior()
+        private void AttackBehavior()
         {
             timeSincePlayerSeen = 0;
             fighter.Attack(player);
         }
 
-        bool IsPlayerInAttackRange()
+        private bool IsPlayerInAttackRange()
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
             return distanceToPlayer < chaseDistance;
         }
 
-        void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, chaseDistance);

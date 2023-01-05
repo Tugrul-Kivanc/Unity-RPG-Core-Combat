@@ -6,9 +6,9 @@ namespace RPG.SceneManagement
 {
     public class Fader : MonoBehaviour
     {
-        CanvasGroup canvasGroup;
+        private CanvasGroup canvasGroup;
 
-        void Awake()
+        private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }

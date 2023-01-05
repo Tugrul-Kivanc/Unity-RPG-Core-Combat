@@ -10,19 +10,19 @@ namespace RPG.SceneManagement
 {
     public class Portal : MonoBehaviour
     {
-        [SerializeField] int sceneIndexToLoad = -1;
-        [SerializeField] Transform spawnPoint;
-        [SerializeField] DestinationIdentifier destination;
-        [SerializeField] float fadeOutTime = 0.5f;
-        [SerializeField] float fadeInTime = 0.5f;
-        [SerializeField] float fadeWaitTime = 0.1f;
+        [SerializeField] private int sceneIndexToLoad = -1;
+        [SerializeField] private Transform spawnPoint;
+        [SerializeField] private DestinationIdentifier destination;
+        [SerializeField] private float fadeOutTime = 0.5f;
+        [SerializeField] private float fadeInTime = 0.5f;
+        [SerializeField] private float fadeWaitTime = 0.1f;
 
-        enum DestinationIdentifier
+        public enum DestinationIdentifier
         {
             A, B, C, D, E, F
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
@@ -30,7 +30,7 @@ namespace RPG.SceneManagement
             }
         }
 
-        IEnumerator SceneTransition()
+        private IEnumerator SceneTransition()
         {
             if (sceneIndexToLoad < 0)
             {
@@ -58,7 +58,7 @@ namespace RPG.SceneManagement
             Destroy(gameObject);
         }
 
-        void UpdatePlayer(Portal otherPortal)
+        private void UpdatePlayer(Portal otherPortal)
         {
             GameObject player = GameObject.FindWithTag("Player");
             player.GetComponent<NavMeshAgent>().enabled = false;
@@ -67,7 +67,7 @@ namespace RPG.SceneManagement
             player.GetComponent<NavMeshAgent>().enabled = true;
         }
 
-        Portal GetOtherPortal()
+        private Portal GetOtherPortal()
         {
             foreach (Portal portal in FindObjectsOfType<Portal>())
             {

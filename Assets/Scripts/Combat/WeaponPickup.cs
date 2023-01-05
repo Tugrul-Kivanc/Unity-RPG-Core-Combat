@@ -7,9 +7,9 @@ namespace RPG.Combat
 {
     public class WeaponPickup : MonoBehaviour
     {
-        [SerializeField] Weapon weapon = null;
-        [SerializeField] float pickupRespawnTime = 2f;
-        void OnTriggerEnter(Collider other)
+        [SerializeField] private Weapon weapon = null;
+        [SerializeField] private float pickupRespawnTime = 2f;
+        private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
@@ -18,14 +18,14 @@ namespace RPG.Combat
             }
         }
 
-        IEnumerator HideForSeconds(float seconds)
+        private IEnumerator HideForSeconds(float seconds)
         {
             SetPickupActive(false);
             yield return new WaitForSeconds(seconds);
             SetPickupActive(true);
         }
 
-        void SetPickupActive(bool value)
+        private void SetPickupActive(bool value)
         {
             GetComponent<Collider>().enabled = value;
             foreach (Transform child in transform)

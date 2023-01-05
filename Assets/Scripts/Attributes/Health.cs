@@ -8,10 +8,10 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float healthPoints = 100f;
-        bool isDead = false;
+        [SerializeField] private float healthPoints = 100f;
+        private bool isDead = false;
 
-        void Awake()
+        private void Awake()
         {
             healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
         }
@@ -31,7 +31,7 @@ namespace RPG.Attributes
             }
         }
 
-        void Die()
+        private void Die()
         {
             if (isDead) return;
             isDead = true;
@@ -39,7 +39,7 @@ namespace RPG.Attributes
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }
 
-        void AwardExperience(GameObject instigator)
+        private void AwardExperience(GameObject instigator)
         {
             Experience experience = instigator.GetComponent<Experience>();
             if (experience == null) return;

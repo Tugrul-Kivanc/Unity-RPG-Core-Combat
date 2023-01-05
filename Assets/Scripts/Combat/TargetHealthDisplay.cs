@@ -8,17 +8,17 @@ namespace RPG.Combat
 {
     public class TargetHealthDisplay : MonoBehaviour
     {
-        Fighter fighter;
-        TextMeshProUGUI healthText;
+        private Fighter fighter;
+        private TextMeshProUGUI healthText;
         // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
             fighter = GameObject.FindWithTag("Player").GetComponent<Fighter>();
             healthText = GetComponent<TextMeshProUGUI>();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (fighter.GetTarget() != null)
             {
