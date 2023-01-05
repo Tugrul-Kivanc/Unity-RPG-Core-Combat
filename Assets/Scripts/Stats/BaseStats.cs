@@ -52,8 +52,7 @@ namespace RPG.Stats
                     return level;
                 }
             }
-            startingLevel = penultimateLevel + 1;
-            return startingLevel;
+            return penultimateLevel + 1;
         }
 
         public int GetLevel()
