@@ -70,5 +70,15 @@ namespace RPG.Combat
             Projectile projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
             projectileInstance.SetTarget(target, instigator, calculatedDamage);
         }
+
+        public float GetDamage()
+        {
+            return damage;
+        }
+
+        public float GetRange()
+        {
+            return range;
+        }
     }
 }
