@@ -22,7 +22,7 @@ namespace RPG.Combat
         {
             if (fighter.GetTarget() != null)
             {
-                healthText.text = fighter.GetTarget().GetHealth().ToString();
+                healthText.text = fighter.GetTarget().GetHealth().ToString() + "/" + fighter.GetTarget().GetMaxHealth().ToString();
             }
             else
             {
