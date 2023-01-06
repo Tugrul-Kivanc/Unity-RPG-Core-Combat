@@ -14,7 +14,7 @@ namespace RPG.Control
         [SerializeField] private float suspicionTime = 6f;
         [SerializeField] private float waypointTolerance = 1f;
         [SerializeField] private float waypointGuardingDuration = 4f;
-        [Range(0, 1)][SerializeField] private float patrolSpeedFraction = 0.5f;
+        [Range(0f, 1f)][SerializeField] private float patrolSpeedFraction = 0.5f;
         [SerializeField] private PatrolPath patrolPath;
         private GameObject player;
         private Fighter fighter;

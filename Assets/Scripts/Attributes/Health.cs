@@ -9,10 +9,12 @@ namespace RPG.Attributes
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] private float healthPoints = 100f;
+        [Range(0f, 1f)][SerializeField] private float levelUpHealthRegenFraction = 0.9f;
         private bool isDead = false;
 
         private void Awake()
         {
+            GetComponent<BaseStats>().onLevelUp += RegenerateHealth;
             healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
@@ -29,6 +31,11 @@ namespace RPG.Attributes
                 Die();
                 AwardExperience(instigator);
             }
+        }
+
+        private void RegenerateHealth()
+        {
+            healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * levelUpHealthRegenFraction;
         }
 
         private void Die()
