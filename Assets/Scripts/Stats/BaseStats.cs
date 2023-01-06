@@ -41,7 +41,13 @@ namespace RPG.Stats
 
         public float GetStat(Stat stat)
         {
-            return progression.GetStat(stat, characterClass, GetLevel()) + GetAdditiveModifier(stat);
+            // ( Base Damage + Additive Damage ) * Multiplicative Damage
+            return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetMultiplicativeMofidifiers(stat) * 0.01f);
+        }
+
+        private float GetBaseStat(Stat stat)
+        {
+            return progression.GetStat(stat, characterClass, GetLevel());
         }
 
         public int GetLevel()
@@ -78,6 +84,19 @@ namespace RPG.Stats
             foreach (var provider in GetComponents<IModifierProvider>())
             {
                 foreach (var modifier in provider.GetAdditiveModifiers(stat))
+                {
+                    total += modifier;
+                }
+            }
+            return total;
+        }
+
+        private float GetMultiplicativeMofidifiers(Stat stat)
+        {
+            float total = 0;
+            foreach (var provider in GetComponents<IModifierProvider>())
+            {
+                foreach (var modifier in provider.GetMultiplicativeMofidifiers(stat))
                 {
                     total += modifier;
                 }

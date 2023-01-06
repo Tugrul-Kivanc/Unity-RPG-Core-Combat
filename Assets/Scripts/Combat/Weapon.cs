@@ -12,9 +12,11 @@ namespace RPG.Combat
         [SerializeField] private bool isRightHanded = true;
         [SerializeField] private Projectile projectile = null;
         [SerializeField] private float range = 2f;
-        [SerializeField] private float damage = 5f;
+        [SerializeField] private float baseDamage = 5f;
+        [SerializeField] private float multiplicativeBonus = 0f;
         public float Range => range;
-        public float Damage => damage;
+        public float BaseDamage => baseDamage;
+        public float MultiplicativeBonus => multiplicativeBonus;
         private const string weaponName = "Weapon";
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
@@ -69,16 +71,6 @@ namespace RPG.Combat
         {
             Projectile projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
             projectileInstance.SetTarget(target, instigator, calculatedDamage);
-        }
-
-        public float GetDamage()
-        {
-            return damage;
-        }
-
-        public float GetRange()
-        {
-            return range;
         }
     }
 }

@@ -146,7 +146,15 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.GetDamage();
+                yield return currentWeapon.BaseDamage;
+            }
+        }
+
+        public IEnumerable<float> GetMultiplicativeMofidifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return currentWeapon.MultiplicativeBonus;
             }
         }
     }
