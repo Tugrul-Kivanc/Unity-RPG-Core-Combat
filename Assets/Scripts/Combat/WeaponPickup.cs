@@ -10,6 +10,7 @@ namespace RPG.Combat
     {
         [SerializeField] private Weapon weapon = null;
         [SerializeField] private float pickupRespawnTime = 2f;
+        [SerializeField] private CursorType pickupCursor;
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -47,6 +48,11 @@ namespace RPG.Combat
                 PickupWeapon(callingController.GetComponent<Fighter>());
             }
             return true;
+        }
+
+        public CursorType GetCursorType()
+        {
+            return pickupCursor;
         }
     }
 

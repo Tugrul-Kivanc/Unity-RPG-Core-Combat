@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e28eb42fa1a524f8395c79131a9785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatCursor: {fileID: 11400000, guid: 50359104a4277c644bf08ded08b4fa4e, type: 2}
 --- !u!1001 &7320679462223498046
 PrefabInstance:
   m_ObjectHideFlags: 0

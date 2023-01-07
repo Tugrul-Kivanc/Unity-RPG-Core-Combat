@@ -9,12 +9,13 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] GameObject cursorsPrefab;
         private Health health;
         private Cursors cursors;
         private void Awake()
         {
             health = GetComponent<Health>();
-            cursors = GetComponent<Cursors>();
+            cursors = cursorsPrefab.GetComponent<Cursors>();
         }
         private void Update()
         {
@@ -41,7 +42,7 @@ namespace RPG.Control
                 {
                     if (raycastable.HandleRaycast(this))
                     {
-                        cursors.CombatCursor.SetCursor();
+                        raycastable.GetCursorType().SetCursor();
                         return true;
                     }
                 }
