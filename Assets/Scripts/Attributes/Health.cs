@@ -85,6 +85,11 @@ namespace RPG.Attributes
             return GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
+        public float GetHealthFraction()
+        {
+            return GetHealth() / GetMaxHealth();
+        }
+
         public object CaptureState()
         {
             return healthPoints.value;
