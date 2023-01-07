@@ -27,18 +27,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experiencePoints: 0
---- !u!114 &7122694563460434362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4902660786131331472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7af77275bc4688847bc54d446c56e643, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1739433559260463110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,6 +42,19 @@ MonoBehaviour:
   combatCursor: {fileID: 11400000, guid: 50359104a4277c644bf08ded08b4fa4e, type: 2}
   movementCursor: {fileID: 11400000, guid: db6547026b44ae04781b2d9e99985043, type: 2}
   noneCursor: {fileID: 11400000, guid: 9fc4833e40e15014a983f46fa38cd9c1, type: 2}
+  uiCursor: {fileID: 11400000, guid: 343409d82f8932b4fb8bea95c4a99a49, type: 2}
+--- !u!114 &7122694563460434362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4902660786131331472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af77275bc4688847bc54d446c56e643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1080417002832114521
 PrefabInstance:
   m_ObjectHideFlags: 0

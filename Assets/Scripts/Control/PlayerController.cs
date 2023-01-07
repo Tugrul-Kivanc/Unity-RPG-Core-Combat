@@ -3,6 +3,7 @@ using RPG.Combat;
 using RPG.Attributes;
 using RPG.Movement;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace RPG.Control
 {
@@ -17,11 +18,27 @@ namespace RPG.Control
         }
         private void Update()
         {
-            if (health.IsDead()) return;
+            if (InteractWithUI()) return;
+            if (health.IsDead())
+            {
+                cursors.NoneCursor.SetCursor();
+                return;
+            }
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
 
             cursors.NoneCursor.SetCursor();
+        }
+
+        private bool InteractWithUI()
+        {
+            //if cursor is over the ui
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                cursors.UICursor.SetCursor();
+                return true;
+            }
+            return false;
         }
 
         private bool InteractWithCombat()
