@@ -4,12 +4,14 @@ using RPG.Attributes;
 using RPG.Movement;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 
 namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] GameObject cursorsPrefab;
+        [SerializeField] float maxNavMeshProjectionDistance = 1f;
         private Health health;
         private Cursors cursors;
         private void Awake()
@@ -78,18 +80,33 @@ namespace RPG.Control
 
         private bool InteractWithMovement()
         {
-            RaycastHit hit;
-            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            Vector3 moveLocation;
+            bool hasHit = RaycastNavMesh(out moveLocation);
             if (hasHit)
             {
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<Mover>().StartMoveAction(hit.point);
+                    GetComponent<Mover>().StartMoveAction(moveLocation);
                 }
                 cursors.MovementCursor.SetCursor();
                 return true;
             }
             return false;
+        }
+
+        private bool RaycastNavMesh(out Vector3 moveLocation)
+        {
+            moveLocation = new Vector3();
+            RaycastHit hit;
+            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            if (!hasHit) return false;
+
+            NavMeshHit navMeshHit;
+            bool hasCastToNavMesh = NavMesh.SamplePosition(hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
+            if (!hasCastToNavMesh) return false;
+
+            moveLocation = navMeshHit.position;
+            return true;
         }
 
         private static Ray GetMouseRay()
