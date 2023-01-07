@@ -20,6 +20,7 @@ namespace RPG.Attributes
         private void Update()
         {
             healthText.text = health.GetHealth().ToString() + "/" + health.GetMaxHealth().ToString();
+            healthText.text = string.Format("{0:0}/{1:0}", health.GetHealth(), health.GetMaxHealth());
         }
     }
 }
