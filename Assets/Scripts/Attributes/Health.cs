@@ -1,4 +1,3 @@
-using System;
 using GameDevTV.Utils;
 using RPG.Core;
 using RPG.Saving;
@@ -7,9 +6,10 @@ using UnityEngine;
 
 namespace RPG.Attributes
 {
-    public class Health : MonoBehaviour, ISaveable
+    public partial class Health : MonoBehaviour, ISaveable
     {
         [Range(0f, 1f)][SerializeField] private float levelUpHealthRegenFraction = 0.9f;
+        [SerializeField] private TakeDamageEvent onTakeDamage;
         private bool isDead = false;
         private LazyValue<float> healthPoints;
 
@@ -45,8 +45,8 @@ namespace RPG.Attributes
 
         public void TakeDamage(GameObject instigator, float damage)
         {
-            print(gameObject.name + " took " + damage + " damage.");
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
+            onTakeDamage?.Invoke(damage);
             if (healthPoints.value <= 0)
             {
                 Die();

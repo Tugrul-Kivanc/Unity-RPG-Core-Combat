@@ -41,6 +41,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorsPrefab: {fileID: 306803828966849539, guid: 9ba7738f456f35b43972b23105420117,
     type: 3}
+  maxNavMeshProjectionDistance: 1
+  maxNavPathLengthToMove: 30
 --- !u!1001 &1080417002832114521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,6 +198,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281883741243406095, guid: 750e3c6876a501e42b5827ec7a3d24d1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 750e3c6876a501e42b5827ec7a3d24d1, type: 3}

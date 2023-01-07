@@ -19,7 +19,7 @@ namespace RPG.Attributes
         // Update is called once per frame
         private void Update()
         {
-            healthText.text = health.GetHealth().ToString() + "/" + health.GetMaxHealth().ToString();
+            //healthText.text = health.GetHealth().ToString() + "/" + health.GetMaxHealth().ToString();
             healthText.text = string.Format("{0:0}/{1:0}", health.GetHealth(), health.GetMaxHealth());
         }
     }

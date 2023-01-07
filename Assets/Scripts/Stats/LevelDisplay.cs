@@ -19,7 +19,8 @@ namespace RPG.Stats
         // Update is called once per frame
         private void Update()
         {
-            experienceText.text = baseStats.CalculateLevel().ToString();
+            //experienceText.text = baseStats.CalculateLevel().ToString();
+            experienceText.text = string.Format("{0:0}", baseStats.CalculateLevel());
         }
     }
 }
