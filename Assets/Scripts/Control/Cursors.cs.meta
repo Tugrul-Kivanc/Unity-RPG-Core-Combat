@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bec4f35024929ad438544ae3dd0e207e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - combatCursor: {fileID: 2800000, guid: 2d18e23e3ce249b4489b8bcdd02d3f48, type: 3}
+  - movementCursor: {fileID: 2800000, guid: 8ea795c067613354898068091ffc7130, type: 3}
+  - defaultCursor: {fileID: 2800000, guid: 21628736160fcc9488493401da3ef621, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -9,15 +9,19 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
         private Health health;
+        private Cursors cursors;
         private void Awake()
         {
             health = GetComponent<Health>();
+            cursors = GetComponent<Cursors>();
         }
         private void Update()
         {
             if (health.IsDead()) return;
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
+
+            cursors.NoneCursor.SetCursor();
         }
 
         private bool InteractWithCombat()
@@ -33,6 +37,7 @@ namespace RPG.Control
                 {
                     GetComponent<Fighter>().Attack(target.gameObject);
                 }
+                cursors.CombatCursor.SetCursor();
                 return true;
             }
             return false;
@@ -48,6 +53,7 @@ namespace RPG.Control
                 {
                     GetComponent<Mover>().StartMoveAction(hit.point);
                 }
+                cursors.MovementCursor.SetCursor();
                 return true;
             }
             return false;
