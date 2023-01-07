@@ -3632,6 +3632,16 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3562074689433263630, guid: 4dad98d413dfdf84abfc41ebe665f3b4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.8499756
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562074689433263630, guid: 4dad98d413dfdf84abfc41ebe665f3b4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -7.0999756
+      objectReference: {fileID: 0}
     - target: {fileID: 5924226128495447660, guid: 4dad98d413dfdf84abfc41ebe665f3b4,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3849,7 +3859,7 @@ PrefabInstance:
     - target: {fileID: 5091943135455829961, guid: 0ddedde581e111c40abe8b0cfe915e17,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7784975
+      value: 1.7782152
       objectReference: {fileID: 0}
     - target: {fileID: 5091943135455829962, guid: 0ddedde581e111c40abe8b0cfe915e17,
         type: 3}

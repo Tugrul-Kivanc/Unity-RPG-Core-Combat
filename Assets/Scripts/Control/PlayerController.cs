@@ -12,6 +12,7 @@ namespace RPG.Control
     {
         [SerializeField] GameObject cursorsPrefab;
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] float maxNavPathLengthToMove = 30f;
         private Health health;
         private Cursors cursors;
         private void Awake()
@@ -106,7 +107,27 @@ namespace RPG.Control
             if (!hasCastToNavMesh) return false;
 
             moveLocation = navMeshHit.position;
+
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, moveLocation, NavMesh.AllAreas, path);
+            if (!hasPath) return false;
+            if (path.status != NavMeshPathStatus.PathComplete) return false;
+            if (GetPathLength(path) > maxNavPathLengthToMove) return false;
+
             return true;
+        }
+
+        private float GetPathLength(NavMeshPath path)
+        {
+            float totalDistance = 0f;
+            if (path.corners.Length < 2) return totalDistance;
+
+            for (int i = 0; i < path.corners.Length - 1; i++)
+            {
+                totalDistance += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+            }
+
+            return totalDistance;
         }
 
         private static Ray GetMouseRay()
