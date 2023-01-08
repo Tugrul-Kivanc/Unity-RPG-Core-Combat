@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using RPG.Saving;
+using RPG.Control;
 
 namespace RPG.SceneManagement
 {
@@ -20,6 +21,11 @@ namespace RPG.SceneManagement
         public enum DestinationIdentifier
         {
             A, B, C, D, E, F
+        }
+
+        private PlayerController GetPlayerController()
+        {
+            return GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -42,10 +48,12 @@ namespace RPG.SceneManagement
             Fader fader = FindObjectOfType<Fader>();
             SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
 
+            GetPlayerController().enabled = false;
             yield return fader.FadeOut(fadeOutTime);
             savingWrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneIndexToLoad);
+            GetPlayerController().enabled = false;
             savingWrapper.Load();
 
             Portal otherPortal = GetOtherPortal();
@@ -53,8 +61,9 @@ namespace RPG.SceneManagement
             savingWrapper.Save();
 
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
 
+            GetPlayerController().enabled = true;
             Destroy(gameObject);
         }
 
