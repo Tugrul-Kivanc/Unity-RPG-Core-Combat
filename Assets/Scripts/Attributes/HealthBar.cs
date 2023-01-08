@@ -26,5 +26,10 @@ namespace RPG.Attributes
             rootCanvas.enabled = true;
             foreground.localScale = new Vector3(healthComponent.GetHealthFraction(), 1f, 1f);
         }
+
+        public void RemoveHealthbar()
+        {
+            rootCanvas.enabled = false;
+        }
     }
 }

@@ -3,6 +3,7 @@ using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Attributes
 {
@@ -10,6 +11,7 @@ namespace RPG.Attributes
     {
         [Range(0f, 1f)][SerializeField] private float levelUpHealthRegenFraction = 0.9f;
         [SerializeField] private TakeDamageEvent onTakeDamage;
+        [SerializeField] private UnityEvent onDie;
         private bool isDead = false;
         private LazyValue<float> healthPoints;
 
@@ -46,11 +48,15 @@ namespace RPG.Attributes
         public void TakeDamage(GameObject instigator, float damage)
         {
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
-            onTakeDamage?.Invoke(damage);
             if (healthPoints.value <= 0)
             {
+                onDie?.Invoke();
                 Die();
                 AwardExperience(instigator);
+            }
+            else
+            {
+                onTakeDamage?.Invoke(damage);
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using RPG.Attributes;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Combat
 {
@@ -14,6 +15,7 @@ namespace RPG.Combat
         [SerializeField] private bool isHoming = false;
         [SerializeField] private GameObject hitFX = null;
         [SerializeField] private GameObject[] objectsToDestroyOnHit = null;
+        [SerializeField] private UnityEvent onHit;
         private Health target = null;
         private GameObject instigator = null;
         private float damage = 0f;
@@ -59,6 +61,7 @@ namespace RPG.Combat
             target.TakeDamage(instigator, damage);
             speed = 0f;
 
+            onHit?.Invoke();
             if (hitFX != null)
             {
                 Instantiate(hitFX, transform.position, transform.rotation);
