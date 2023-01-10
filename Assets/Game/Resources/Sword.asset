@@ -18,5 +18,5 @@ MonoBehaviour:
   isRightHanded: 1
   projectile: {fileID: 0}
   range: 2.2
-  baseDamage: 4
-  multiplicativeBonus: 20
+  baseDamage: 8
+  multiplicativeBonus: 40
