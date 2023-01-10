@@ -1,3 +1,4 @@
+using System;
 using GameDevTV.Utils;
 using RPG.Core;
 using RPG.Saving;
@@ -108,6 +109,11 @@ namespace RPG.Attributes
             {
                 Die();
             }
+        }
+
+        public void Heal(float healthToRestore)
+        {
+            healthPoints.value = Mathf.Min(GetMaxHealth(), healthPoints.value + healthToRestore);
         }
     }
 }
