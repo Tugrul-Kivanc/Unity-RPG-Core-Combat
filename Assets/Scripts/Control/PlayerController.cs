@@ -11,7 +11,8 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private GameObject cursorsPrefab;
-        [SerializeField] float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] private float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] private float sphereCastRadius = 0.5f;
         private Health health;
         private Cursors cursors;
         private Mover mover;
@@ -37,7 +38,7 @@ namespace RPG.Control
 
         private bool InteractWithComponent()
         {
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), sphereCastRadius);
             SortRaycastHitsByDistance(hits);
             foreach (RaycastHit hit in hits)
             {
