@@ -15,17 +15,17 @@ namespace RPG.Combat
         [SerializeField] private float timeBetweenAttacks = 1f;
         [SerializeField] private Transform rightHandTransform = null;
         [SerializeField] private Transform leftHandTransform = null;
-        [SerializeField] private Weapon defaultWeapon = null;
+        [SerializeField] private WeaponConfig defaultWeapon = null;
         private Health target;
-        private LazyValue<Weapon> currentWeapon;
+        private LazyValue<WeaponConfig> currentWeapon;
         private float timeSinceLastAttack = Mathf.Infinity;
 
         private void Awake()
         {
-            currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+            currentWeapon = new LazyValue<WeaponConfig>(SetupDefaultWeapon);
         }
 
-        private Weapon SetupDefaultWeapon()
+        private WeaponConfig SetupDefaultWeapon()
         {
             AttachWeapon(defaultWeapon);
             return defaultWeapon;
@@ -126,13 +126,13 @@ namespace RPG.Combat
             return !(targetToTest == null || targetToTest.IsDead());
         }
 
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(WeaponConfig weapon)
         {
             currentWeapon.value = weapon;
             AttachWeapon(weapon);
         }
 
-        private void AttachWeapon(Weapon weapon)
+        private void AttachWeapon(WeaponConfig weapon)
         {
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
@@ -148,7 +148,7 @@ namespace RPG.Combat
             //Use addressables on later versions for saving.
             //https://docs.unity3d.com/Manual/com.unity.addressables.html
             string weaponName = (string)state;
-            var weapon = Resources.Load(weaponName) as Weapon;
+            var weapon = Resources.Load(weaponName) as WeaponConfig;
             EquipWeapon(weapon);
         }
 
