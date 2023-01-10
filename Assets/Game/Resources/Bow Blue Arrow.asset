@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bow Blue Arrow
   m_EditorClassIdentifier: 
   animatorOverride: {fileID: 22100000, guid: 3a48010087fa97c45949a8fe30501645, type: 2}
-  equippedWeaponPrefab: {fileID: 1755656396735690045, guid: 5f932346246be6d4bafc93415376aee3,
+  equippedWeaponPrefab: {fileID: 6067724930032883929, guid: 5f932346246be6d4bafc93415376aee3,
     type: 3}
   isRightHanded: 0
   projectile: {fileID: 8308151915168973912, guid: 3c28c7d373653c34f8cd264f8ec9b120,

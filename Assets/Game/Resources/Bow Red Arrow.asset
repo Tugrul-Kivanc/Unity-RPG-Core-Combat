@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bow Red Arrow
   m_EditorClassIdentifier: 
   animatorOverride: {fileID: 22100000, guid: 3a48010087fa97c45949a8fe30501645, type: 2}
-  equippedWeaponPrefab: {fileID: 1755656396735690045, guid: 5f932346246be6d4bafc93415376aee3,
+  equippedWeaponPrefab: {fileID: 6067724930032883929, guid: 5f932346246be6d4bafc93415376aee3,
     type: 3}
   isRightHanded: 0
   projectile: {fileID: 3970238161900077296, guid: 0b2423ca46700b246992046dd1da1af6,
