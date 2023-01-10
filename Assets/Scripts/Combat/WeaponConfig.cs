@@ -18,17 +18,20 @@ namespace RPG.Combat
         public float BaseDamage => baseDamage;
         public float MultiplicativeBonus => multiplicativeBonus;
         private const string weaponName = "Weapon";
-        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
+        public Weapon Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
             DestroyOldWeapon(rightHand, leftHand);
 
+            Weapon weapon = null;
             if (equippedWeaponPrefab != null)
             {
-                Weapon weapon = Instantiate(equippedWeaponPrefab, GetHandTransform(rightHand, leftHand));
+                weapon = Instantiate(equippedWeaponPrefab, GetHandTransform(rightHand, leftHand));
                 weapon.gameObject.name = weaponName;
             }
 
             SetupAnimator(animator);
+
+            return weapon;
         }
 
         private void SetupAnimator(Animator animator)

@@ -6,9 +6,9 @@ namespace RPG.Combat
 {
     public class Weapon : MonoBehaviour
     {
-        public void OhHit()
+        public void OnHit()
         {
-
+            print("Weapon hit " + gameObject.name);
         }
     }
 }
