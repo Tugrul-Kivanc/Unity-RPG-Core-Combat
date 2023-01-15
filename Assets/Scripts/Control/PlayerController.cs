@@ -15,6 +15,8 @@ namespace RPG.Control
         private Health health;
         private Cursors cursors;
         private Mover mover;
+        private bool isDraggingUI = false;
+
         private void Awake()
         {
             health = GetComponent<Health>();
@@ -71,12 +73,24 @@ namespace RPG.Control
 
         private bool InteractWithUI()
         {
+            if (Input.GetMouseButtonUp(0))
+            {
+                isDraggingUI = false;
+            }
+
             //if cursor is over the ui
             if (EventSystem.current.IsPointerOverGameObject())
             {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    isDraggingUI = true;
+                }
                 cursors.UICursor.SetCursor();
                 return true;
             }
+
+            if (isDraggingUI) return true;
+
             return false;
         }
 
