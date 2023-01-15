@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Saving;
+using UnityEngine.SceneManagement;
 
 namespace GameDevTV.Inventories
 {
@@ -12,6 +13,7 @@ namespace GameDevTV.Inventories
     {
         // STATE
         private List<Pickup> droppedItems = new List<Pickup>();
+        private List<DropRecord> droppedItemsOnAnotherScene = new List<DropRecord>();
 
         // PUBLIC
 
@@ -62,31 +64,56 @@ namespace GameDevTV.Inventories
             public string itemID;
             public SerializableVector3 position;
             public int number;
+            public int sceneBuildIndex;
         }
 
         object ISaveable.CaptureState()
         {
             RemoveDestroyedDrops();
-            var droppedItemsList = new DropRecord[droppedItems.Count];
-            for (int i = 0; i < droppedItemsList.Length; i++)
+
+            var droppedItemsList = new List<DropRecord>();
+            int sceneIndex = GetSceneIndex();
+
+            foreach (var pickup in droppedItems)
             {
-                droppedItemsList[i].itemID = droppedItems[i].GetItem().GetItemID();
-                droppedItemsList[i].position = new SerializableVector3(droppedItems[i].transform.position);
-                droppedItemsList[i].number = droppedItems[i].GetNumber();
+                var droppedItem = new DropRecord();
+
+                droppedItem.itemID = pickup.GetItem().GetItemID();
+                droppedItem.position = new SerializableVector3(pickup.transform.position);
+                droppedItem.number = pickup.GetNumber();
+                droppedItem.sceneBuildIndex = sceneIndex;
+
+                droppedItemsList.Add(droppedItem);
             }
+
+            droppedItemsList.AddRange(droppedItemsOnAnotherScene);
             return droppedItemsList;
         }
 
         void ISaveable.RestoreState(object state)
         {
-            var droppedItemsList = (DropRecord[])state;
+            var droppedItemsList = (List<DropRecord>)state;
+            int sceneIndex = GetSceneIndex();
+            droppedItemsOnAnotherScene.Clear();
+
             foreach (var item in droppedItemsList)
             {
+                if (item.sceneBuildIndex != sceneIndex)
+                {
+                    droppedItemsOnAnotherScene.Add(item);
+                    continue;
+                }
+
                 var pickupItem = InventoryItem.GetFromID(item.itemID);
                 Vector3 position = item.position.ToVector();
                 int number = item.number;
                 SpawnPickup(pickupItem, position, number);
             }
+        }
+
+        private static int GetSceneIndex()
+        {
+            return SceneManager.GetActiveScene().buildIndex;
         }
 
         /// <summary>

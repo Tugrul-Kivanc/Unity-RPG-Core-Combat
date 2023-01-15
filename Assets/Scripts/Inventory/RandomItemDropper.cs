@@ -12,7 +12,6 @@ namespace RPG.Inventory
     {
         [SerializeField] float maxDropDistance = 1f;
         [SerializeField] DropLibrary dropLibrary;
-        [SerializeField] int itemDropQuantity = 1;
         private float sampleDistance = 0.1f;
         private const int randomAttempts = 10;
 

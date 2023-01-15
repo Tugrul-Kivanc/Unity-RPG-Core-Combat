@@ -64,6 +64,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebd4f7515fd4b14c94f1712ee520415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6714056685656045069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4902660786131331472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299b6ce825aadb49b806ffc0293c1f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDropDistance: 1
+  dropLibrary: {fileID: 0}
 --- !u!114 &7122694563460434362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,19 +92,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxNavMeshProjectionDistance: 1
   sphereCastRadius: 0.5
---- !u!114 &6714056685656045069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4902660786131331472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c299b6ce825aadb49b806ffc0293c1f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDropDistance: 1
 --- !u!1001 &1080417002832114521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,14 +160,14 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 3125957438692005694, guid: 750e3c6876a501e42b5827ec7a3d24d1,
         type: 3}
-      propertyPath: rightHandTransform
-      value: 
-      objectReference: {fileID: 5590448998645177948}
-    - target: {fileID: 3125957438692005694, guid: 750e3c6876a501e42b5827ec7a3d24d1,
-        type: 3}
       propertyPath: leftHandTransform
       value: 
       objectReference: {fileID: 5590448998645120564}
+    - target: {fileID: 3125957438692005694, guid: 750e3c6876a501e42b5827ec7a3d24d1,
+        type: 3}
+      propertyPath: rightHandTransform
+      value: 
+      objectReference: {fileID: 5590448998645177948}
     - target: {fileID: 3307795589981818629, guid: 750e3c6876a501e42b5827ec7a3d24d1,
         type: 3}
       propertyPath: healthPoints
@@ -246,16 +247,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196697675836667564, guid: 750e3c6876a501e42b5827ec7a3d24d1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.99999994
-      objectReference: {fileID: 0}
-    - target: {fileID: 8196697675836667564, guid: 750e3c6876a501e42b5827ec7a3d24d1,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 8281883741243406095, guid: 750e3c6876a501e42b5827ec7a3d24d1,
         type: 3}
