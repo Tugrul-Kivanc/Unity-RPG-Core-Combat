@@ -52,6 +52,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySize: 16
+--- !u!114 &6349337518850754202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4902660786131331472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebd4f7515fd4b14c94f1712ee520415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7122694563460434362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxNavMeshProjectionDistance: 1
   sphereCastRadius: 0.5
---- !u!114 &6349337518850754202
+--- !u!114 &6714056685656045069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,9 +87,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4902660786131331472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ebd4f7515fd4b14c94f1712ee520415, type: 3}
+  m_Script: {fileID: 11500000, guid: c299b6ce825aadb49b806ffc0293c1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDropDistance: 1
 --- !u!1001 &1080417002832114521
 PrefabInstance:
   m_ObjectHideFlags: 0
