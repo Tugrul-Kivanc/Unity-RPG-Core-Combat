@@ -60,12 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDropDistance: 1
-  dropItemList:
-  - {fileID: 11400000, guid: 95934151f4be7c3469713aea1d0c38eb, type: 2}
-  - {fileID: 11400000, guid: 58afade9161c9524797cf88dbf2320b8, type: 2}
-  - {fileID: 11400000, guid: a96079e5dfebda14b8dc452b1cebd73e, type: 2}
-  - {fileID: 11400000, guid: 91689db5ab49f414cb494e7677874d6f, type: 2}
-  numberOfItemsToDrop: 3
+  dropLibrary: {fileID: 11400000, guid: efbe94e4e39f28a4d9dd0ef44be535fd, type: 2}
   itemDropQuantity: 1
 --- !u!1001 &4650884275036529141
 PrefabInstance:

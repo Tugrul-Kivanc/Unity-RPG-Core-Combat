@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GameDevTV.Inventories;
 using RPG.Attributes;
+using RPG.Stats;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,18 +11,18 @@ namespace RPG.Inventory
     public class RandomItemDropper : ItemDropper
     {
         [SerializeField] float maxDropDistance = 1f;
-        [SerializeField] InventoryItem[] dropItemList;
-        [SerializeField] int numberOfItemsToDrop = 1;
+        [SerializeField] DropLibrary dropLibrary;
         [SerializeField] int itemDropQuantity = 1;
         private float sampleDistance = 0.1f;
         private const int randomAttempts = 10;
 
         public void DropRandomItem()
         {
-            for (int i = 0; i < numberOfItemsToDrop; i++)
+            var randomDrops = dropLibrary.GetRandomDrops(GetComponent<BaseStats>().GetLevel());
+
+            foreach (var drop in randomDrops)
             {
-                var randomItem = dropItemList[Random.Range(0, dropItemList.Length)];
-                DropItem(randomItem, itemDropQuantity);
+                DropItem(drop.item, drop.number);
             }
         }
 
