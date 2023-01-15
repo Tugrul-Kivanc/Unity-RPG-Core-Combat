@@ -11,7 +11,7 @@ using GameDevTV.Inventories;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
+    public class Fighter : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] private float timeBetweenAttacks = 1f;
         [SerializeField] private Transform rightHandTransform = null;
@@ -185,22 +185,6 @@ namespace RPG.Combat
         public Health GetTarget()
         {
             return target;
-        }
-
-        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
-        {
-            if (stat == Stat.Damage)
-            {
-                yield return currentWeaponConfig.BaseDamage;
-            }
-        }
-
-        public IEnumerable<float> GetMultiplicativeMofidifiers(Stat stat)
-        {
-            if (stat == Stat.Damage)
-            {
-                yield return currentWeaponConfig.MultiplicativeBonus;
-            }
         }
     }
 }

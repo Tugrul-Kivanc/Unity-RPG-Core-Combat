@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using GameDevTV.Inventories;
 using RPG.Attributes;
+using RPG.Stats;
 using UnityEngine;
 
 namespace RPG.Combat
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Create New Scriptable Weapon", order = 0)]
-    public class WeaponConfig : EquipableItem
+    public class WeaponConfig : EquipableItem, IModifierProvider
     {
         [SerializeField] private AnimatorOverrideController animatorOverride = null;
         [SerializeField] private Weapon equippedWeaponPrefab = null;
@@ -75,6 +77,16 @@ namespace RPG.Combat
         {
             Projectile projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
             projectileInstance.SetTarget(target, instigator, calculatedDamage);
+        }
+
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage) yield return baseDamage;
+        }
+
+        public IEnumerable<float> GetMultiplicativeMofidifiers(Stat stat)
+        {
+            if (stat == Stat.Damage) yield return multiplicativeBonus;
         }
     }
 }
