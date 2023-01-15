@@ -10,7 +10,6 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private GameObject cursorsPrefab;
         [SerializeField] private float maxNavMeshProjectionDistance = 1f;
         [SerializeField] private float sphereCastRadius = 0.5f;
         private Health health;
@@ -19,7 +18,7 @@ namespace RPG.Control
         private void Awake()
         {
             health = GetComponent<Health>();
-            cursors = cursorsPrefab.GetComponent<Cursors>();
+            cursors = FindObjectOfType<Cursors>();
             mover = GetComponent<Mover>();
         }
         private void Update()
