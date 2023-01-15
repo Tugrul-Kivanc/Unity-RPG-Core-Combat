@@ -11,10 +11,12 @@ namespace RPG.Control
         [SerializeField] private CursorType noneCursor;
         [SerializeField] private CursorType uiCursor;
         [SerializeField] private CursorType pickupCursor;
+        [SerializeField] private CursorType fullPickupCursor;
         public CursorType CombatCursor => combatCursor;
         public CursorType MovementCursor => movementCursor;
         public CursorType NoneCursor => noneCursor;
         public CursorType UICursor => uiCursor;
         public CursorType PickupCursor => pickupCursor;
+        public CursorType FullPickupCursor => fullPickupCursor;
     }
 }

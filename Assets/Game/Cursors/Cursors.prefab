@@ -48,3 +48,4 @@ MonoBehaviour:
   noneCursor: {fileID: 11400000, guid: 9fc4833e40e15014a983f46fa38cd9c1, type: 2}
   uiCursor: {fileID: 11400000, guid: 343409d82f8932b4fb8bea95c4a99a49, type: 2}
   pickupCursor: {fileID: 11400000, guid: 2494e6d08c32be941b719e4c2b72e149, type: 2}
+  fullPickupCursor: {fileID: 11400000, guid: 36da7c3e18f6d8a4581da62caf40df33, type: 2}
