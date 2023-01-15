@@ -7,6 +7,7 @@ using RPG.Stats;
 using System.Collections.Generic;
 using GameDevTV.Utils;
 using System;
+using GameDevTV.Inventories;
 
 namespace RPG.Combat
 {
@@ -18,6 +19,7 @@ namespace RPG.Combat
         [SerializeField] private WeaponConfig defaultWeapon = null;
         private Health target;
         private Mover mover;
+        private Equipment equipment;
         private WeaponConfig currentWeaponConfig;
         private LazyValue<Weapon> currentWeapon;
         private float timeSinceLastAttack = Mathf.Infinity;
@@ -25,8 +27,17 @@ namespace RPG.Combat
         private void Awake()
         {
             mover = GetComponent<Mover>();
+            equipment = GetComponent<Equipment>();
             currentWeaponConfig = defaultWeapon;
             currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+        }
+
+        private void OnEnable()
+        {
+            if (equipment)
+            {
+                equipment.equipmentUpdated += UpdateEquippedWeapon;
+            }
         }
 
         private Weapon SetupDefaultWeapon()
@@ -141,6 +152,14 @@ namespace RPG.Combat
         {
             currentWeaponConfig = weapon;
             currentWeapon.value = AttachWeapon(weapon);
+        }
+
+        private void UpdateEquippedWeapon()
+        {
+            WeaponConfig weaponConfig = equipment.GetItemInSlot(EquipLocation.Weapon) as WeaponConfig;
+
+            if (weaponConfig == null) EquipWeapon(defaultWeapon);
+            else EquipWeapon(weaponConfig);
         }
 
         private Weapon AttachWeapon(WeaponConfig weapon)

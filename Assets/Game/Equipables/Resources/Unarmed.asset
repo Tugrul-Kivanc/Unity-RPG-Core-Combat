@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742fb1d0528c21b478411ac2472c7cbb, type: 3}
   m_Name: Unarmed
   m_EditorClassIdentifier: 
+  itemID: b85233b4-3a1a-4e50-85af-bd854babf27d
+  displayName: Fists
+  description: 
+  icon: {fileID: 0}
+  pickup: {fileID: 0}
+  stackable: 0
+  allowedEquipLocation: 5
   animatorOverride: {fileID: 0}
   equippedWeaponPrefab: {fileID: 2637425284875980929, guid: 4e6a3c05ff93b3b4a8438d89da556c7e,
     type: 3}
