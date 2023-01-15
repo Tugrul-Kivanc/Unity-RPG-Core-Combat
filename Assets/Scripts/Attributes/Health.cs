@@ -1,4 +1,5 @@
 using System;
+using GameDevTV.Inventories;
 using GameDevTV.Utils;
 using RPG.Core;
 using RPG.Saving;
@@ -14,11 +15,13 @@ namespace RPG.Attributes
         [SerializeField] private TakeDamageEvent onTakeDamage;
         [SerializeField] private UnityEvent onDie;
         private bool isDead = false;
+        private Equipment equipment;
         private LazyValue<float> healthPoints;
 
         private void Awake()
         {
             healthPoints = new LazyValue<float>(GetInitialHealth);
+            equipment = GetComponent<Equipment>();
         }
 
         private float GetInitialHealth()
@@ -33,12 +36,14 @@ namespace RPG.Attributes
 
         private void OnEnable()
         {
-            GetComponent<BaseStats>().onLevelUp += RegenerateHealth;
+            GetComponent<BaseStats>().onLevelUp += IncreaseMaxHealthOnLevelUp;
+            if (equipment != null) equipment.equipmentUpdated += UpdateHealth;
         }
 
         private void OnDisable()
         {
-            GetComponent<BaseStats>().onLevelUp -= RegenerateHealth;
+            GetComponent<BaseStats>().onLevelUp -= IncreaseMaxHealthOnLevelUp;
+            if (equipment != null) equipment.equipmentUpdated -= UpdateHealth;
         }
 
         public bool IsDead()
@@ -61,9 +66,14 @@ namespace RPG.Attributes
             }
         }
 
-        private void RegenerateHealth()
+        private void IncreaseMaxHealthOnLevelUp()
         {
             healthPoints.value = GetComponent<BaseStats>().GetStat(Stat.Health) * levelUpHealthRegenFraction;
+        }
+
+        private void UpdateHealth()
+        {
+            healthPoints.value = Mathf.Min(healthPoints.value, GetMaxHealth());
         }
 
         private void Die()
